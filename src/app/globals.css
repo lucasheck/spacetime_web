@@ -3,5 +3,6 @@
 @tailwind utilities;
 
 body {
-	background-color: #111111;
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
 }
