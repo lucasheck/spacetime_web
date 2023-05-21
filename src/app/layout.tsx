@@ -1,16 +1,13 @@
 import { Profile } from "@/components/Profile";
 import "./globals.css";
-import {
-  Roboto_Flex as Roboto,
-  Bai_Jamjuree as BaiJamjuree,
-} from "next/font/google";
+import { Bai_Jamjuree as BaiJamjuree, Roboto_Flex } from "next/font/google";
 import { cookies } from "next/headers";
 import { ReactNode } from "react";
 import { SignIn } from "@/components/SignIn";
 import { Hero } from "@/components/Hero";
 import { Copyright } from "@/components/Copyright";
 
-const roboto = Roboto({ subsets: ["latin"], variable: "--font-roboto" });
+const roboto = Roboto_Flex({ subsets: ["latin"], variable: "--font-roboto2" });
 const baiJamJuree = BaiJamjuree({
   subsets: ["latin"],
   weight: "700",
