@@ -14,6 +14,7 @@ interface Memory {
   coverUrl: string;
   content: string;
   createdAt: string;
+  dateEvent: string;
 }
 
 export default async function Home() {
@@ -32,7 +33,6 @@ export default async function Home() {
   });
 
   const memories: Memory[] = response.data;
-
   if (memories.length === 0) {
     return <EmptyMemories />;
   }
@@ -43,7 +43,7 @@ export default async function Home() {
         return (
           <div key={memory.id} className="flex flex-col space-y-4">
             <time className="-ml-8 flex items-center gap-2 text-sm text-gray-100 before:h-px before:w-5 before:bg-gray-50">
-              {dayjs(memory.createdAt).format("DD[ de ]MMMM[ de ]YYYY")}
+              {dayjs(memory.dateEvent).format("DD[ de ]MMMM[ de ]YYYY")}
             </time>
             <Image
               src={memory.coverUrl}
@@ -56,7 +56,10 @@ export default async function Home() {
               {memory.content}
             </p>
             <Link
-              href={`/memories/${memory.id}`}
+              href={{
+                pathname: `/memories/${memory.id}`,
+                query: `${token}`,
+              }}
               className="flex items-center gap-2 text-sm text-gray-200 hover:text-gray-100"
             >
               Ler mais

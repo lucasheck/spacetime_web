@@ -29,12 +29,15 @@ export function NewMemoryForm() {
 
     const token = Cookie.get("token");
 
+    const dateEvent = formData.get("dateEvent") + "T12:00:00.000Z";
+
     await api.post(
       "/memories",
       {
         coverUrl,
         content: formData.get("content"),
         isPublic: formData.get("isPublic"),
+        dateEvent: dateEvent,
       },
       {
         headers: {
@@ -69,6 +72,16 @@ export function NewMemoryForm() {
             className="h-4 w-4 rounded border-gray-400 bg-gray-700 text-purple-500"
           />
           Tornar memória pública
+        </label>
+
+        <label htmlFor="dateEvent">
+          Data da Memória
+          <input
+            className="ml-2 rounded-lg border-dashed bg-transparent "
+            type="date"
+            name="dateEvent"
+            id="dateEvent"
+          />
         </label>
       </div>
       <MediaPicker />
