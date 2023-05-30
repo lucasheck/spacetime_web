@@ -64,9 +64,7 @@ export default function EditMemoryForm({ dados }: MemoryProps) {
       }
     );
 
-    if (response.status === 200) {
-      window.location.assign("http://localhost:3000/");
-    }
+    router.push("/");
   };
 
   return (
@@ -86,7 +84,7 @@ export default function EditMemoryForm({ dados }: MemoryProps) {
 
       <form
         onSubmit={handleUpdateMemory}
-        className="flex h-full flex-1 flex-col gap-2"
+        className="flex h-full flex-1 flex-col gap-3"
       >
         <div className="flex items-center gap-4">
           <label
@@ -121,7 +119,7 @@ export default function EditMemoryForm({ dados }: MemoryProps) {
           name="content"
           id="txtContent"
           spellCheck={false}
-          className="h-full w-full resize-none rounded border-0 bg-transparent p-0 text-justify text-lg leading-relaxed text-gray-100 placeholder:text-gray-400 focus:ring-0"
+          className="h-40 w-full resize-none rounded border-0 bg-transparent p-0 text-justify text-lg leading-relaxed text-gray-100 placeholder:text-gray-400 focus:ring-0 lg:h-full"
           placeholder="Fique livre para adicionar fotos, vídeos e relatos sobre essa experiência que você quer lembrar para sempre."
           defaultValue={content}
           disabled
