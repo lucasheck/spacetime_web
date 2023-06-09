@@ -1,6 +1,8 @@
-import { User } from 'lucide-react'
+import { User } from "lucide-react";
+import { ILanguageProps, getDictionary } from "@/lib/language";
 
-export function SignIn() {
+export function SignIn({ language }: ILanguageProps) {
+  const { createAccount, saveMemories } = getDictionary(language, "SignIn");
   return (
     <a
       href={`https://github.com/login/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID}`}
@@ -9,9 +11,10 @@ export function SignIn() {
       <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-400">
         <User className="h-5 w-5 text-gray-500" />
       </div>
-      <p className="max-w-[140px] text-sm leading-snug">
-        <span className="underline">Crie sua conta</span> e salve suas memórias!
+      <p className="max-w-[160px] text-sm leading-snug">
+        <span className="underline">{createAccount}</span>
+        {saveMemories}
       </p>
     </a>
-  )
+  );
 }

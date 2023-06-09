@@ -20,10 +20,12 @@ interface Memory {
 }
 
 export default function Home() {
-  const token = Cookie.get("token");
-  const dateTime = new Date();
-  const isAuthenticated = token;
   const [memories, setMemories] = useState<Memory[] | null>(null);
+
+  const token = Cookie.get("token");
+  const isAuthenticated = token;
+
+  const dateTime = new Date();
 
   if (!isAuthenticated) {
     return <EmptyMemories />;
@@ -43,7 +45,7 @@ export default function Home() {
     loadMemories();
   }, []);
 
-  if (memories === null) return <EmptyMemories />;
+  if (memories === null || memories?.length === 0) return <EmptyMemories />;
 
   return (
     <div className="flex flex-col gap-10 p-8">
