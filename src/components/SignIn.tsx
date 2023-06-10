@@ -1,8 +1,11 @@
 import { User } from "lucide-react";
-import { ILanguageProps, getDictionary } from "@/lib/language";
+import { EComponents, ILanguageProps, getDictionary } from "@/lib/language";
 
 export function SignIn({ language }: ILanguageProps) {
-  const { createAccount, saveMemories } = getDictionary(language, "SignIn");
+  const { createAccount, saveMemories } = getDictionary(
+    language,
+    EComponents.SignIn
+  );
   return (
     <a
       href={`https://github.com/login/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_GITHUB_CLIENT_ID}`}

@@ -27,11 +27,19 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   const isAuthenticated = cookies().has("token");
 
   let language = "en";
+
+  const langCookie = cookies().has("lang");
+  if (langCookie) {
+    const lang = cookies().get("lang");
+    language = lang?.value ?? "en";
+  }
+
   const header = headers();
   const param = header.get("x-invoke-query");
   if (param) {
     const paramDecode = JSON.parse(decodeURIComponent(param));
     if (paramDecode.lang === "ptBR") language = "ptBR";
+    if (paramDecode.lang === "en") language = "en";
   }
 
   return (

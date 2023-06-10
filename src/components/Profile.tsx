@@ -1,10 +1,11 @@
 import { getUser } from "@/lib/auth";
 import Image from "next/image";
-import { ILanguageProps, getDictionary } from "@/lib/language";
+import { ILanguageProps, getDictionary, EComponents } from "@/lib/language";
 
 export function Profile({ language }: ILanguageProps) {
   const { name, avatarUrl } = getUser();
-  const { salutation, logout } = getDictionary(language, "Profile");
+
+  const { salutation, logout } = getDictionary(language, EComponents.Profile);
   return (
     <div className="flex items-center gap-3 text-left transition-colors">
       <Image

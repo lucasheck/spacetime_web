@@ -1,37 +1,88 @@
 export interface ILanguageProps {
-  language: String;
+  language: string;
+}
+
+export enum EComponents {
+  SignIn = "SignIn",
+  Profile = "Profile",
+  Hero = "Hero",
+  Copyright = "Copyright",
+  EmptyMemories = "EmptyMemories",
+  NewMemory = "NewMemory",
+  NewMemoryForm = "NewMemoryForm",
+  EditMemoryForm = "EditMemoryForm",
+}
+
+enum ELanguage {
+  ptBR = "ptBR",
+  en = "en",
 }
 
 interface ISignIn {
-  createAccount?: String;
-  saveMemories?: String;
+  createAccount?: string;
+  saveMemories?: string;
 }
 
 interface IProfile {
-  salutation?: String;
-  logout?: String;
+  salutation?: string;
+  logout?: string;
 }
 
 interface IHero {
-  title?: String;
-  abstract?: String;
-  button?: String;
+  title?: string;
+  abstract?: string;
+  button?: string;
 }
 
 interface ICopyright {
-  paragraph?: String;
+  paragraph?: string;
 }
 
-interface Ierror {}
+interface INewMemory {
+  link?: string;
+}
+
+interface IMemoryForm {
+  mediaPickerInput?: string;
+  checkBoxInput?: string;
+  dateInput?: string;
+  placeHolder?: string;
+  buttonGoBack?: string;
+  buttonEdit?: string;
+  buttonSave?: string;
+}
+
+export interface IEmptyMemories {
+  paragraph?: string;
+  link?: string;
+}
+
+export interface IChildren {
+  emptyMemories?: {
+    paragraph: string;
+    link: string;
+  };
+  memories?: {
+    link: string;
+  };
+}
+
+type IDictionary = ISignIn &
+  IProfile &
+  IHero &
+  ICopyright &
+  INewMemory &
+  IMemoryForm &
+  IChildren;
 
 export function getDictionary(
-  language: String,
-  component: String
-): ISignIn & IProfile & IHero & ICopyright {
+  language: string,
+  component?: EComponents
+): IDictionary {
   switch (component) {
-    case "SignIn":
+    case EComponents.SignIn:
       const SignInText: ISignIn =
-        language === "ptBR"
+        language === ELanguage.ptBR
           ? {
               createAccount: "Crie sua conta",
               saveMemories: " e salve suas memórias!",
@@ -41,10 +92,9 @@ export function getDictionary(
               saveMemories: " and save your memories!",
             };
       return SignInText;
-
-    case "Profile":
+    case EComponents.Profile:
       const ProfileText: IProfile =
-        language === "ptBR"
+        language === ELanguage.ptBR
           ? {
               salutation: "Olá",
               logout: "Sair",
@@ -54,9 +104,9 @@ export function getDictionary(
               logout: "Logout",
             };
       return ProfileText;
-    case "Hero":
+    case EComponents.Hero:
       const HeroText: IHero =
-        language === "ptBR"
+        language === ELanguage.ptBR
           ? {
               title: "Sua cápsula do tempo",
               abstract:
@@ -70,9 +120,9 @@ export function getDictionary(
               button: "REGISTER MEMORY",
             };
       return HeroText;
-    case "Copyright":
+    case EComponents.Copyright:
       const CopyrightText: ICopyright =
-        language === "ptBR"
+        language === ELanguage.ptBR
           ? {
               paragraph: "Feito com 💜 no NLW da Rocketseat",
             }
@@ -80,8 +130,81 @@ export function getDictionary(
               paragraph: "Made with 💜 at Rocketseat's NLW event",
             };
       return CopyrightText;
+    case EComponents.NewMemory:
+      const NewMemoryText: INewMemory =
+        language === ELanguage.ptBR
+          ? {
+              link: "Voltar à linha do tempo",
+            }
+          : {
+              link: "Back to timeline",
+            };
+      return NewMemoryText;
+    case EComponents.NewMemoryForm:
+      const newMemoryFormText: IMemoryForm =
+        language === ELanguage.ptBR
+          ? {
+              mediaPickerInput: "Anexar mídia",
+              checkBoxInput: "Tornar memória pública",
+              dateInput: "Data da Memória",
+              buttonSave: "Salvar",
+              placeHolder:
+                "Fique livre para adicionar fotos, vídeos e relatos sobre essa experiência que você quer lembrar para sempre.",
+            }
+          : {
+              mediaPickerInput: "Attach media",
+              checkBoxInput: "Make public memory",
+              dateInput: "Memory date",
+              buttonSave: "Save",
+              placeHolder:
+                "Feel free to add photos, videos and stories about that experience you want to remember forever.",
+            };
+      return newMemoryFormText;
+    case EComponents.EditMemoryForm:
+      const editMemoryFormText: IMemoryForm =
+        language === ELanguage.ptBR
+          ? {
+              checkBoxInput: "Tornar memória pública",
+              dateInput: "Data da Memória",
+              placeHolder:
+                "Fique livre para adicionar fotos, vídeos e relatos sobre essa experiência que você quer lembrar para sempre.",
+              buttonGoBack: "Voltar",
+              buttonEdit: "Editar",
+              buttonSave: "Salvar",
+            }
+          : {
+              checkBoxInput: "Make public memory",
+              dateInput: "Memory date",
+              placeHolder:
+                "Feel free to add photos, videos and stories about that experience you want to remember forever.",
+              buttonGoBack: "Back",
+              buttonEdit: "Edit",
+              buttonSave: "Save",
+            };
+      return editMemoryFormText;
     default:
-      const Ierror: Ierror = {};
-      return Ierror;
+      if (language === ELanguage.ptBR) {
+        const children: IChildren = {
+          emptyMemories: {
+            paragraph: "Você ainda não registrou nenhuma lembrança, comece a ",
+            link: "criar agora",
+          },
+          memories: {
+            link: "Leia mais",
+          },
+        };
+        return children;
+      } else {
+        const children: IChildren = {
+          emptyMemories: {
+            paragraph: "You haven't registered any memories yet, start ",
+            link: "creating now",
+          },
+          memories: {
+            link: "Read more",
+          },
+        };
+        return children;
+      }
   }
 }

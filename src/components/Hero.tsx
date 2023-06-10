@@ -1,10 +1,10 @@
 import Image from "next/image";
 import logo from "../assets/logo.svg";
 import Link from "next/link";
-import { getDictionary, ILanguageProps } from "@/lib/language";
+import { EComponents, getDictionary, ILanguageProps } from "@/lib/language";
 
 export function Hero({ language }: ILanguageProps) {
-  const { title, abstract, button } = getDictionary(language, "Hero");
+  const { title, abstract, button } = getDictionary(language, EComponents.Hero);
   return (
     <div className="max-w-[420px] space-y-5">
       <Image src={logo} alt="NLW Spacetime" />

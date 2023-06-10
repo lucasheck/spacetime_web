@@ -6,7 +6,8 @@ export function MediaPicker() {
   const [preview, setPreview] = useState<string | null>(null);
   function onFileSelected(event: ChangeEvent<HTMLInputElement>) {
     const { files } = event.target;
-    if (!files) {
+    if (!files || !files?.length) {
+      setPreview(null);
       return;
     }
 

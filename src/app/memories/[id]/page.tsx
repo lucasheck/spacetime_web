@@ -1,14 +1,10 @@
 "use client";
 import { EmptyMemories } from "@/components/EmptyMemories";
 import { api } from "@/lib/api";
-import dayjs from "dayjs";
-import ptBr from "dayjs/locale/pt-br";
 import EditMemoryForm from "@/components/EditMemoryForm";
 import { useEffect, useState } from "react";
 import Cookie from "js-cookie";
 import { useSearchParams } from "next/navigation";
-
-dayjs.locale(ptBr);
 
 interface Memory {
   id: string;
