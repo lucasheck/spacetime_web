@@ -18,7 +18,7 @@ const baiJamJuree = BaiJamjuree({
 });
 
 export const metadata = {
-  title: "NLW Spacetime",
+  title: "NLW Spacetime - Lucas Heck",
   description:
     "Uma cápsula do tempo construída com React, Next.js, TypeScript e TailwindCSS",
 };
